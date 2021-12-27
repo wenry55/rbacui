@@ -13,30 +13,35 @@
 </template>
 
 <script>
-  export default {
-    name: 'DefaultLayout',
+export default {
+  name: "DefaultLayout",
 
-    components: {
-      DefaultBar: () => import(
+  components: {
+    DefaultBar: () =>
+      import(
         /* webpackChunkName: "default-app-bar" */
-        './AppBar'
+        "./AppBar"
       ),
-      DefaultDrawer: () => import(
+    DefaultDrawer: () =>
+      import(
         /* webpackChunkName: "default-drawer" */
-        './Drawer'
+        "./Drawer"
       ),
-      DefaultFooter: () => import(
+    DefaultFooter: () =>
+      import(
         /* webpackChunkName: "default-footer" */
-        './Footer'
+        "./Footer"
       ),
-      DefaultSettings: () => import(
+    DefaultSettings: () =>
+      import(
         /* webpackChunkName: "default-settings" */
-        './Settings'
+        "./Settings"
       ),
-      DefaultView: () => import(
+    DefaultView: () =>
+      import(
         /* webpackChunkName: "default-view" */
-        './View'
+        "./View"
       ),
-    },
-  }
+  },
+};
 </script>

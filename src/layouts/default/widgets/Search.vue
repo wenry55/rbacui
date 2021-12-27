@@ -6,18 +6,8 @@
     hide-details
     style="max-width: 220px"
   >
-    <template
-      v-if="$vuetify.breakpoint.mdAndUp"
-      v-slot:append-outer
-    >
-      <v-btn
-        class="mt-n2 ml-n2"
-        fab
-        small
-        elevation="2"
-        height="44"
-        width="44"
-      >
+    <template v-if="$vuetify.breakpoint.mdAndUp" v-slot:append-outer>
+      <v-btn class="mt-n2 ml-n2" fab small elevation="2" height="44" width="44">
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
     </template>
@@ -25,7 +15,7 @@
 </template>
 
 <script>
-  export default {
-    name: 'DefaultSearch',
-  }
+export default {
+  name: "DefaultSearch",
+};
 </script>

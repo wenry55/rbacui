@@ -4,7 +4,7 @@
     class="v-snackbar--material"
     v-bind="{
       ...$attrs,
-      'color': 'transparent'
+      color: 'transparent',
     }"
   >
     <material-alert
@@ -21,58 +21,58 @@
 </template>
 
 <script>
-  export default {
-    name: 'MaterialSnackbar',
+export default {
+  name: "MaterialSnackbar",
 
-    props: {
-      dismissible: {
-        type: Boolean,
-        default: true,
-      },
-      type: {
-        type: String,
-        default: '',
-      },
-      value: Boolean,
+  props: {
+    dismissible: {
+      type: Boolean,
+      default: true,
     },
-
-    data () {
-      return {
-        internalValue: this.value,
-      }
+    type: {
+      type: String,
+      default: "",
     },
+    value: Boolean,
+  },
 
-    watch: {
-      internalValue (val, oldVal) {
-        if (val === oldVal) return
+  data() {
+    return {
+      internalValue: this.value,
+    };
+  },
 
-        this.$emit('input', val)
-      },
-      value (val, oldVal) {
-        if (val === oldVal) return
+  watch: {
+    internalValue(val, oldVal) {
+      if (val === oldVal) return;
 
-        this.internalValue = val
-      },
+      this.$emit("input", val);
     },
-  }
+    value(val, oldVal) {
+      if (val === oldVal) return;
+
+      this.internalValue = val;
+    },
+  },
+};
 </script>
 
 <style lang="sass">
-  .v-snackbar--material
-    margin-top: 32px
-    margin-bottom: 32px
+.v-snackbar--material
+  margin-top: 32px
+  margin-bottom: 32px
 
-    .v-alert
-      padding: 32px 16px
+  .v-alert
+    padding: 32px 16px
 
-    .v-alert--material,
-    .v-snack__wrapper
-      border-radius: 4px
+  .v-alert--material,
+  .v-snack__wrapper
+    border-radius: 4px
 
-    .v-snack__content
-      overflow: visible
-      padding: 0
+  .v-snack__content
+    overflow: visible
+    padding: 0
 
-    .v-snack__action
-      display: none
+  .v-snack__action
+    display: none
 </style>

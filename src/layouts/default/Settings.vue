@@ -8,11 +8,15 @@
       flat
       link
       min-width="100"
-      style="position: fixed; top: 115px; right: -35px; border-radius: 8px; z-index: 1;"
+      style="
+        position: fixed;
+        top: 115px;
+        right: -35px;
+        border-radius: 8px;
+        z-index: 1;
+      "
     >
-      <v-icon large>
-        mdi-cog
-      </v-icon>
+      <v-icon large> mdi-cog </v-icon>
     </v-card>
 
     <v-menu
@@ -27,22 +31,12 @@
       origin="top right"
       transition="scale-transition"
     >
-      <v-card
-        class="text-center mb-0"
-        width="300"
-      >
+      <v-card class="text-center mb-0" width="300">
         <v-card-text>
           <strong class="mb-3 d-inline-block">SIDEBAR FILTERS</strong>
 
-          <v-item-group
-            v-model="color"
-            mandatory
-          >
-            <v-item
-              v-for="color in colors"
-              :key="color"
-              :value="color"
-            >
+          <v-item-group v-model="color" mandatory>
+            <v-item v-for="color in colors" :key="color" :value="color">
               <template v-slot="{ active, toggle }">
                 <v-avatar
                   :class="active && 'v-settings__item--active'"
@@ -59,10 +53,7 @@
 
           <strong class="mb-3 d-inline-block">SIDEBAR BACKGROUND</strong>
 
-          <v-item-group
-            v-model="gradient"
-            mandatory
-          >
+          <v-item-group v-model="gradient" mandatory>
             <v-item
               v-for="(scrim, index) in gradients"
               :key="scrim"
@@ -83,13 +74,8 @@
 
           <v-divider class="my-4 secondary" />
 
-          <v-row
-            align="center"
-            no-gutters
-          >
-            <v-col cols="auto">
-              Dark Mode
-            </v-col>
+          <v-row align="center" no-gutters>
+            <v-col cols="auto"> Dark Mode </v-col>
 
             <v-spacer />
 
@@ -105,13 +91,8 @@
 
           <v-divider class="my-4 secondary" />
 
-          <v-row
-            align="center"
-            no-gutters
-          >
-            <v-col cols="auto">
-              Sidebar Mini
-            </v-col>
+          <v-row align="center" no-gutters>
+            <v-col cols="auto"> Sidebar Mini </v-col>
 
             <v-spacer />
 
@@ -127,13 +108,8 @@
 
           <v-divider class="my-4 secondary" />
 
-          <v-row
-            align="center"
-            no-gutters
-          >
-            <v-col cols="auto">
-              Sidebar Image
-            </v-col>
+          <v-row align="center" no-gutters>
+            <v-col cols="auto"> Sidebar Image </v-col>
 
             <v-spacer />
 
@@ -151,10 +127,7 @@
 
           <strong class="mb-3 d-inline-block">IMAGES</strong>
 
-          <v-card
-            :disabled="!drawerImage"
-            flat
-          >
+          <v-card :disabled="!drawerImage" flat>
             <v-item-group
               v-model="image"
               class="d-flex justify-space-between mb-3"
@@ -171,11 +144,7 @@
                     class="d-inline-block v-settings__item"
                     @click="toggle"
                   >
-                    <v-img
-                      :src="img"
-                      height="100"
-                      width="50"
-                    />
+                    <v-img :src="img" height="100" width="50" />
                   </v-sheet>
                 </template>
               </v-item>
@@ -210,23 +179,12 @@
             <strong class="mb-3 d-inline-block">THANK YOU FOR SHARING!</strong>
           </div>
 
-          <v-btn
-            class="ma-1"
-            color="#55acee"
-            dark
-            rounded
-          >
+          <v-btn class="ma-1" color="#55acee" dark rounded>
             <v-icon>mdi-twitter</v-icon>
             - 45
           </v-btn>
 
-          <v-btn
-            class="ma-1"
-            color="#3b5998"
-            dark
-            default
-            rounded
-          >
+          <v-btn class="ma-1" color="#3b5998" dark default rounded>
             <v-icon>mdi-facebook</v-icon>
             - 50
           </v-btn>
@@ -237,65 +195,48 @@
 </template>
 
 <script>
-  // Mixins
-  import Proxyable from 'vuetify/lib/mixins/proxyable'
+// Mixins
+import Proxyable from "vuetify/lib/mixins/proxyable";
 
-  // Vuex
-  import { get, sync } from 'vuex-pathify'
+// Vuex
+import { get, sync } from "vuex-pathify";
 
-  export default {
-    name: 'DashboardCoreSettings',
+export default {
+  name: "DashboardCoreSettings",
 
-    mixins: [Proxyable],
+  mixins: [Proxyable],
 
-    data: () => ({
-      color: '#E91E63',
-      colors: [
-        '#9C27b0',
-        '#00CAE3',
-        '#4CAF50',
-        '#ff9800',
-        '#E91E63',
-        '#FF5252',
-      ],
-      menu: false,
-      saveImage: '',
-    }),
+  data: () => ({
+    color: "#E91E63",
+    colors: ["#9C27b0", "#00CAE3", "#4CAF50", "#ff9800", "#E91E63", "#FF5252"],
+    menu: false,
+    saveImage: "",
+  }),
 
-    computed: {
-      ...sync('app', [
-        'drawer',
-        'drawerImage',
-        'mini',
-      ]),
-      ...sync('user', [
-        'drawer@gradient',
-        'drawer@image',
-      ]),
-      ...get('user', [
-        'images',
-        'gradients',
-      ]),
+  computed: {
+    ...sync("app", ["drawer", "drawerImage", "mini"]),
+    ...sync("user", ["drawer@gradient", "drawer@image"]),
+    ...get("user", ["images", "gradients"]),
+  },
+
+  watch: {
+    color(val) {
+      this.$vuetify.theme.themes[this.isDark ? "dark" : "light"].primary = val;
     },
-
-    watch: {
-      color (val) {
-        this.$vuetify.theme.themes[this.isDark ? 'dark' : 'light'].primary = val
-      },
-    },
-  }
+  },
+};
 </script>
 
 <style lang="sass">
-  .v-settings
-    .v-item-group > *
-      cursor: pointer
+.v-settings
+  .v-item-group > *
+    cursor: pointer
 
-    &__item
-      border-width: 3px
-      border-style: solid
-      border-color: transparent !important
+  &__item
+    border-width: 3px
+    border-style: solid
+    border-color: transparent !important
 
-      &--active
-        border-color: #00cae3 !important
+    &--active
+      border-color: #00cae3 !important
 </style>

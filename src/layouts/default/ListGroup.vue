@@ -41,49 +41,47 @@
 </template>
 
 <script>
-  // Utilities
-  import { get } from 'vuex-pathify'
+// Utilities
+import { get } from "vuex-pathify";
 
-  export default {
-    name: 'DefaultListGroup',
+export default {
+  name: "DefaultListGroup",
 
-    components: {
-      DefaultListItem: () => import('./ListItem'),
+  components: {
+    DefaultListItem: () => import("./ListItem"),
+  },
+
+  props: {
+    item: {
+      type: Object,
+      default: () => ({}),
     },
+  },
 
-    props: {
-      item: {
-        type: Object,
-        default: () => ({}),
-      },
+  computed: {
+    gradient: get("user/drawer@gradient"),
+    group() {
+      return this.genGroup(this.item.items);
     },
+    title() {
+      const matches = this.item.title.match(/\b(\w)/g);
 
-    computed: {
-      gradient: get('user/drawer@gradient'),
-      group () {
-        return this.genGroup(this.item.items)
-      },
-      title () {
-        const matches = this.item.title.match(/\b(\w)/g)
-
-        return matches.join('')
-      },
+      return matches.join("");
     },
+  },
 
-    methods: {
-      genGroup (items) {
-        return items.reduce((acc, cur) => {
-          if (!cur.to) return acc
+  methods: {
+    genGroup(items) {
+      return items
+        .reduce((acc, cur) => {
+          if (!cur.to) return acc;
 
-          acc.push(
-            cur.items
-              ? this.genGroup(cur.items)
-              : cur.to.slice(1, -1),
-          )
+          acc.push(cur.items ? this.genGroup(cur.items) : cur.to.slice(1, -1));
 
-          return acc
-        }, []).join('|')
-      },
+          return acc;
+        }, [])
+        .join("|");
     },
-  }
+  },
+};
 </script>

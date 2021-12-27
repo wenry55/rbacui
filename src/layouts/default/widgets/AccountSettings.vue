@@ -1,39 +1,37 @@
 <template>
-  <default-list
-    :items="items"
-    class="mb-n2"
-  />
+  <default-list :items="items" class="mb-n2" />
 </template>
 
 <script>
-  export default {
-    name: 'DefaultAccountSettings',
+export default {
+  name: "DefaultAccountSettings",
 
-    components: {
-      DefaultList: () => import(
+  components: {
+    DefaultList: () =>
+      import(
         /* webpackChunkName: "default-list" */
-        '../List'
+        "../List"
       ),
-    },
+  },
 
-    data: () => ({
-      items: [
-        {
-          title: 'John Leider',
-          icon: 'mdi-vuetify',
-          items: [
-            {
-              title: 'My Profile',
-            },
-            {
-              title: 'Edit Profile',
-            },
-            {
-              title: 'Settings',
-            },
-          ],
-        },
-      ],
-    }),
-  }
+  data: () => ({
+    items: [
+      {
+        title: "John Leider",
+        icon: "mdi-vuetify",
+        items: [
+          {
+            title: "My Profile",
+          },
+          {
+            title: "Edit Profile",
+          },
+          {
+            title: "Settings",
+          },
+        ],
+      },
+    ],
+  }),
+};
 </script>

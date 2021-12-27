@@ -1,10 +1,7 @@
 <template>
   <v-list-item class="mb-0 justify-space-between pl-3">
     <v-list-item-avatar>
-      <v-img
-        :src="
-          require('@/assets/vmd.svg')"
-      />
+      <v-img :src="require('@/assets/vmd.svg')" />
     </v-list-item-avatar>
 
     <v-list-item-content class="pl-2">
@@ -18,12 +15,12 @@
 </template>
 
 <script>
-  // Utilities
-  import { get } from 'vuex-pathify'
+// Utilities
+import { get } from "vuex-pathify";
 
-  export default {
-    name: 'DefaultDrawerHeader',
+export default {
+  name: "DefaultDrawerHeader",
 
-    computed: { version: get('app/version') },
-  }
+  computed: { version: get("app/version") },
+};
 </script>
